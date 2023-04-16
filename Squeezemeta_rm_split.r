@@ -3,6 +3,7 @@ library(optparse)
 library(dplyr)
 `%+%` <- function(a,b) {paste0(a,b)}
 
+print("-f is a file which contains 3columns:SRR19064320	SRR19064320_1.fastq.gz	pair1|2 ")
 
 option_list <- list(
   make_option(c("-f", "--first"), type = "character", default = "Finished!",
@@ -24,15 +25,21 @@ for (i in unique(test$V1) ){
   write.table(df1,"sample_meta/" %+% i %+% ".txt",quote = FALSE,row.names = FALSE,col.names = FALSE,sep="\t")
 }
 all_str=""
+all_str_sqm=""
 for (i in unique(test$V1) ){
-  str1=sprintf("SqueezeMeta.pl -m coassembly -s sample_meta/%s.txt -f /data/zhiyu/save_220T_user/zhiyu/Projects/squeezemeta/sixhop/rm_host -t 60 --nobin -p %s  \n", i,i)
+  str1=sprintf("SqueezeMeta.pl -m coassembly -s sample_meta/%s.txt -f /data/zhiyu/save_220T_user/zhiyu/Projects/squeezemeta/sixhop/rm_host -t 60 --nobin -p %s  \n", i,i) # -f is location of rm_host
   print(str1) 
   all_str=all_str %+% str1
  
+  str_sqm=sprintf(" sqm_mapper.pl -r /data/zhiyu/save_220T_user/zhiyu/Database/squeezemeta_databases/db/hosts/Homo_sapiens.GRCh38.dna_rm.primary_assembly.fa.gz -s sample_meta/%s.txt -f . -o rm_host --filter -t 10  \n", i) # -f is location of fastq 
+  print(str_sqm) 
+  all_str_sqm=all_str_sqm %+% str_sqm
 }
+
+
 
 print(all_str)
 writeLines(all_str,"run_bash.sh")
-  
- 
+print(all_str_sqm)
+writeLines(all_str_sqm,"run_bash_sqm.sh")
 
