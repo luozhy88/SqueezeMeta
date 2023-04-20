@@ -12,4 +12,4 @@ _1.fastq.gz 或 _2.fastq.gz
 
 
 
-sed -n "4,10p" run_bash_sqm_no_finished.sh |parallel -j 20
+sed -n "4,10p" run_bash_sqm_no_finished.sh |parallel -j 20 #并行跑5-10行
