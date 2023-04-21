@@ -11,5 +11,13 @@ _1.fastq.gz 或 _2.fastq.gz
 跑  sqm_mapper.pl 需要sample_meta/L8337.txt  
 
 
-
+## sqm
 sed -n "4,10p" run_bash_sqm_no_finished.sh |parallel -j 20 #并行跑5-10行
+
+## create a kegg table
+mkdir merge_table  
+cat */results/12.*.kegg.funcover >merge_table/12.all.kegg.funcover  
+grep -v "Created by " merge_table/12.all.kegg.funcover > merge_table/12.all.kegg.funcover.filtered   
+awk '!arr[$0]++' merge_table/12.all.kegg.funcover.filtered  > merge_table/12.all.kegg.funcover.unique  
+
+
