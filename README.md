@@ -21,3 +21,7 @@ grep -v "Created by " merge_table/m12.all.kegg.funcover > merge_table/m12.all.ke
 awk '!arr[$0]++' merge_table/m12.all.kegg.funcover.filtered  > merge_table/m12.all.kegg.funcover.unique  
 
 
+## create a cog table
+cat \*/results/12.*.cog.funcover > merge_table/m12.all.cog.funcover  
+grep -v "Created by " merge_table/m12.all.cog.funcover  > merge_table/m12.all.cog.funcover.filtered  
+awk '!arr[$0]++' merge_table/m12.all.cog.funcover.filtered    > merge_table/m12.all.cog.funcover.filtered.unique.tsv  
