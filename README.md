@@ -28,3 +28,9 @@ awk '!arr[$0]++' merge_table/m12.all.cog.funcover.filtered    > merge_table/m12.
 
 
 ## create a KEGG table
+
+
+
+## Note
+SqueezeMeta.pl --restart -p <projectname> -step 6 --force-overwrite would restart the pipeline from the taxonomic assignment of genes. The different steps of the pipeline are listed in section 1.  
+ configure_nodb.pl /path/to/db
